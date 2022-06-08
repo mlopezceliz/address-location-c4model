@@ -1,0 +1,16 @@
+@startuml
+!include <c4/C4_Container.puml>  
+
+'ref http://plantuml.com/stdlib
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
+!include <office/Concepts/app_part.puml>
+
+'LAYOUT_WITH_LEGEND
+
+System_Boundary(c1, "Addresses Location System") {
+    Container(web_app, "Web Application", "Admin app")
+}
+System(ip, "IP")
+
+@enduml
