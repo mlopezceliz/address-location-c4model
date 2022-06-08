@@ -1,0 +1,38 @@
+ @startuml
+!include <c4/C4_Context.puml>  
+
+'ref http://plantuml.com/stdlib
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
+!include <office/Concepts/app_part.puml>
+
+'LAYOUT_WITH_LEGEND
+
+title System Context diagram for Addresses Location System
+package "Meli" {
+    Person(admin_actor  , "Addresses admin", "Add nodes, add zipcodes, add deltas ..." )
+
+    System(location_system, "Addresses location system", "Permite obtener información geo politica y de negocio de locaciones.")
+
+    System_Ext(addresses_quality, "Addresses Quality", "Sistema de mejora de la dirección de entrega")
+    System_Ext(addresses_location_delivery, "Addresses Location Delivery", "Sistema para gestionar información de logisticas sobre una location/dirección")
+    System_Ext(vis, "VIS", "Sistema de venta de inmuebles")
+    System_Ext(meli_systems, "<$app_part> \n Meli Sistems", "Aplicaciones del ecosistema de meli que necesitan información de locations")
+}
+System_Ext(ip, "IP", "Sistema para obtener la location de una IP")
+
+System_Ext(google_geo, "Google geo", "Sistema para obtener coordenadas geo espaciales de una location")
+
+
+Rel(admin_actor, location_system, "Administrate")
+
+Rel(meli_systems, location_system, "Uses")
+Rel(addresses_quality, location_system, "Uses")
+Rel(addresses_location_delivery, location_system, "Uses")
+Rel(vis, location_system, "Uses")
+
+Rel(location_system, ip, "Location info by ip")
+Rel(location_system, google_geo, "Geo reverse")
+
+
+@enduml
